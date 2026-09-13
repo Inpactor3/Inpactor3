@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Modelos y datos pesados
+models/*.h5
+models/*.pt
+models/*.ckpt
+data/raw/
+data/interim/
+data/processed/
+*.fasta
+*.fa
+*.fastq
+*.bam
+*.sam
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs y temporales
+*.log
+tmp/
+outputs/
+wandb/
+mlruns/
