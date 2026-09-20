@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1050" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <linearGradient id="gSource" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="gAudit" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/><stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <linearGradient id="gMerge" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dcfce7"/><stop offset="1" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <linearGradient id="gData" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fce7f3"/><stop offset="1" stop-color="#fbcfe8"/>
+    </linearGradient>
+    <linearGradient id="gModel" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#ede9fe"/><stop offset="1" stop-color="#ddd6fe"/>
+    </linearGradient>
+    <linearGradient id="gOut" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#e0f2fe"/><stop offset="1" stop-color="#bae6fd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Título -->
+  <text x="750" y="45" text-anchor="middle" font-size="30" font-weight="700" fill="#0f172a">
+    Inpactor3 — Flujo del proyecto
+  </text>
+  <text x="750" y="75" text-anchor="middle" font-size="16" fill="#475569">
+    De varias bases de datos abiertas a un detector YORO 1D que localiza y clasifica LTR-retrotransposones
+  </text>
+
+  <!-- ETAPA 1: FUENTES -->
+  <g>
+    <rect x="40" y="120" width="280" height="230" rx="14" fill="url(#gSource)" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="180" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#1e3a8a">1 · FUENTES ABIERTAS</text>
+    <text x="180" y="178" text-anchor="middle" font-size="12" fill="#1e40af">Bases públicas de LTR-RTs</text>
+
+    <text x="60" y="210" font-size="12" font-weight="600" fill="#0f172a">InpactorDB V5</text>
+    <text x="60" y="226" font-size="11" fill="#334155">67 241 LTR-RTs de plantas</text>
+    <text x="60" y="240" font-size="10" fill="#64748b">Zenodo 6380332 · CC-BY</text>
+
+    <text x="60" y="262" font-size="12" font-weight="600" fill="#0f172a">PanTEon v1.6.2</text>
+    <text x="60" y="278" font-size="11" fill="#334155">240 k TEs animales+plantas+hongos</text>
+    <text x="60" y="292" font-size="10" fill="#64748b">Zenodo 21372179 · CC-BY</text>
+
+    <text x="60" y="314" font-size="12" font-weight="600" fill="#0f172a">Dfam 40 · REXDB · GyDB</text>
+    <text x="60" y="330" font-size="11" fill="#334155">taxonomía + dominios de referencia</text>
+  </g>
+
+  <!-- ETAPA 2: AUDITORÍA -->
+  <g>
+    <rect x="360" y="120" width="280" height="230" rx="14" fill="url(#gAudit)" stroke="#b45309" stroke-width="2"/>
+    <text x="500" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#78350f">2 · DESCARGA Y AUDITORÍA</text>
+    <text x="500" y="178" text-anchor="middle" font-size="12" fill="#92400e">scripts/audit_datasets.py</text>
+
+    <text x="380" y="210" font-size="12" font-weight="600" fill="#0f172a">¿Qué hace?</text>
+    <text x="380" y="226" font-size="11" fill="#334155">Baja los FASTA desde Zenodo/Dfam</text>
+    <text x="380" y="242" font-size="11" fill="#334155">y cuenta cuántas secuencias hay</text>
+    <text x="380" y="256" font-size="11" fill="#334155">por linaje y por especie.</text>
+
+    <text x="380" y="284" font-size="12" font-weight="600" fill="#0f172a">Nos dice cosas como:</text>
+    <text x="380" y="300" font-size="11" fill="#334155">• 181 especies · 13 linajes</text>
+    <text x="380" y="316" font-size="11" fill="#334155">• TAT domina con 26.6%</text>
+    <text x="380" y="332" font-size="11" fill="#334155">• el corpus está desbalanceado</text>
+  </g>
+
+  <!-- ETAPA 3: FUSIÓN -->
+  <g>
+    <rect x="680" y="120" width="280" height="230" rx="14" fill="url(#gMerge)" stroke="#15803d" stroke-width="2"/>
+    <text x="820" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#14532d">3 · FUSIÓN CANÓNICA</text>
+    <text x="820" y="178" text-anchor="middle" font-size="12" fill="#166534">scripts/merge_corpus.py</text>
+
+    <text x="700" y="210" font-size="12" font-weight="600" fill="#0f172a">Une las fuentes en un solo FASTA:</text>
+    <text x="700" y="228" font-size="11" fill="#334155">• Traduce nombres de linaje al canónico</text>
+    <text x="700" y="242" font-size="11" fill="#334155">  (TORK/TAR → TORK, ORYCO/IVANA → IVANA)</text>
+    <text x="700" y="256" font-size="11" fill="#334155">• Descarta demasiado cortas / largas</text>
+    <text x="700" y="270" font-size="11" fill="#334155">• Elimina duplicados (SHA1 de la secuencia)</text>
+    <text x="700" y="284" font-size="11" fill="#334155">• Guarda proveniencia en JSONL</text>
+
+    <text x="700" y="316" font-size="12" font-weight="600" fill="#065f46">Resultado real:</text>
+    <text x="700" y="332" font-size="11" fill="#0f172a">65 605 secuencias limpias</text>
+  </g>
+
+  <!-- ETAPA 4: VENTANAS -->
+  <g>
+    <rect x="1000" y="120" width="460" height="230" rx="14" fill="url(#gData)" stroke="#be185d" stroke-width="2"/>
+    <text x="1230" y="152" text-anchor="middle" font-size="16" font-weight="700" fill="#831843">4 · VENTANAS DE ENTRENAMIENTO</text>
+    <text x="1230" y="178" text-anchor="middle" font-size="12" fill="#9d174d">src/inpactor3/dataset.py · LTRWindowDataset</text>
+
+    <text x="1020" y="210" font-size="12" font-weight="600" fill="#0f172a">Simula genoma:</text>
+    <text x="1020" y="226" font-size="11" fill="#334155">para cada muestra, elige 1–3 LTR-RTs reales del corpus</text>
+    <text x="1020" y="240" font-size="11" fill="#334155">y los planta en flancos aleatorios hasta llenar 50 000 bp.</text>
+
+    <!-- mini-ilustración -->
+    <rect x="1020" y="256" width="420" height="24" fill="#f9a8d4" stroke="#be185d"/>
+    <rect x="1080" y="256" width="90" height="24" fill="#f472b6"/>
+    <rect x="1230" y="256" width="130" height="24" fill="#f472b6"/>
+    <text x="1050" y="272" font-size="10" fill="#831843">flanco</text>
+    <text x="1105" y="272" font-size="10" font-weight="700" fill="#fff">LTR-RT 1</text>
+    <text x="1195" y="272" font-size="10" fill="#831843">flanco</text>
+    <text x="1265" y="272" font-size="10" font-weight="700" fill="#fff">LTR-RT 2</text>
+    <text x="1385" y="272" font-size="10" fill="#831843">flanco</text>
+
+    <text x="1020" y="308" font-size="11" fill="#334155">Etiquetas: la caja verdadera de cada elemento</text>
+    <text x="1020" y="322" font-size="11" fill="#334155">(start, end, linaje) se convierte en targets por celda</text>
+    <text x="1020" y="336" font-size="11" fill="#334155">de 100 bp → 500 celdas por ventana.</text>
+  </g>
+
+  <!-- Flechas etapa 1 → 4 -->
+  <line x1="320" y1="235" x2="358" y2="235" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="640" y1="235" x2="678" y2="235" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="960" y1="235" x2="998" y2="235" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ETAPA 5: RED YORO1D -->
+  <g>
+    <rect x="80" y="410" width="1340" height="290" rx="16" fill="url(#gModel)" stroke="#6d28d9" stroke-width="2.5"/>
+    <text x="750" y="445" text-anchor="middle" font-size="20" font-weight="700" fill="#4c1d95">5 · Yoro1D — la red que hace TODO en un solo forward</text>
+    <text x="750" y="470" text-anchor="middle" font-size="13" fill="#5b21b6">CNN residual 1D · 0.71 M parámetros · stride total = 100 (100 bp por celda)</text>
+
+    <!-- Entrada -->
+    <rect x="110" y="500" width="230" height="150" rx="10" fill="#fff" stroke="#6d28d9"/>
+    <text x="225" y="524" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">ENTRADA</text>
+    <text x="225" y="548" text-anchor="middle" font-size="11" fill="#334155">Ventana de 50 000 bp</text>
+    <text x="225" y="565" text-anchor="middle" font-size="11" fill="#334155">codificada one-hot</text>
+    <text x="225" y="592" text-anchor="middle" font-size="12" font-weight="600" fill="#0f172a">tensor (B, 4, 50000)</text>
+    <text x="225" y="610" text-anchor="middle" font-size="10" fill="#64748b">4 canales = A · C · G · T</text>
+    <text x="225" y="630" text-anchor="middle" font-size="10" fill="#64748b">B = tamaño del batch</text>
+
+    <!-- Backbone -->
+    <rect x="380" y="500" width="290" height="150" rx="10" fill="#fff" stroke="#6d28d9"/>
+    <text x="525" y="524" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">BACKBONE</text>
+    <text x="525" y="548" text-anchor="middle" font-size="11" fill="#334155">5 bloques residuales 1D</text>
+    <text x="525" y="565" text-anchor="middle" font-size="11" fill="#334155">strides 2·5·5·2·1 = 100</text>
+    <text x="525" y="592" text-anchor="middle" font-size="10" fill="#64748b">Conv1D · BatchNorm · ReLU · skip</text>
+    <text x="525" y="614" text-anchor="middle" font-size="11" fill="#334155">Reduce 50 000 bp → 500 celdas</text>
+    <text x="525" y="632" text-anchor="middle" font-size="10" fill="#64748b">(una decisión cada 100 bp)</text>
+
+    <!-- Cabezas -->
+    <rect x="710" y="500" width="320" height="150" rx="10" fill="#fff" stroke="#6d28d9"/>
+    <text x="870" y="524" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">4 CABEZAS SIMULTÁNEAS</text>
+    <text x="720" y="548" font-size="11" fill="#0f172a">• <tspan font-weight="700">objectness</tspan>  ¿hay LTR-RT aquí?</text>
+    <text x="720" y="566" font-size="11" fill="#0f172a">• <tspan font-weight="700">offset</tspan>       ¿dónde empieza dentro?</text>
+    <text x="720" y="584" font-size="11" fill="#0f172a">• <tspan font-weight="700">longitud</tspan>     ¿cuánto mide?</text>
+    <text x="720" y="602" font-size="11" fill="#0f172a">• <tspan font-weight="700">linaje</tspan>       ¿ALE, TAT, ATHILA, …?</text>
+    <text x="870" y="630" text-anchor="middle" font-size="10" fill="#64748b">Todas se entrenan con una única pérdida combinada</text>
+
+    <!-- Salida cruda -->
+    <rect x="1070" y="500" width="330" height="150" rx="10" fill="#fff" stroke="#6d28d9"/>
+    <text x="1235" y="524" text-anchor="middle" font-size="13" font-weight="700" fill="#4c1d95">SALIDA CRUDA</text>
+    <text x="1235" y="548" text-anchor="middle" font-size="11" fill="#334155">tensor (B, 500, 3 + n_clases)</text>
+    <text x="1085" y="574" font-size="10" fill="#334155">[0]     objectness (logit)</text>
+    <text x="1085" y="590" font-size="10" fill="#334155">[1]     offset dentro de la celda</text>
+    <text x="1085" y="606" font-size="10" fill="#334155">[2]     log-longitud</text>
+    <text x="1085" y="622" font-size="10" fill="#334155">[3..]   probabilidad de cada linaje</text>
+    <text x="1235" y="642" text-anchor="middle" font-size="10" fill="#64748b">Aún hay que decodificar y limpiar</text>
+
+    <!-- flechitas internas -->
+    <line x1="342" y1="575" x2="378" y2="575" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="672" y1="575" x2="708" y2="575" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="1032" y1="575" x2="1068" y2="575" stroke="#6d28d9" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- Nota clave -->
+    <text x="750" y="682" text-anchor="middle" font-size="12" font-style="italic" fill="#4c1d95">
+      Novedad frente a Inpactor2: una sola red decide "hay/no hay + dónde + qué tamaño + qué linaje" en un forward.
+    </text>
+  </g>
+
+  <!-- Flecha etapa 4 → 5 -->
+  <line x1="750" y1="360" x2="750" y2="408" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ETAPA 6: DECODE + NMS -->
+  <g>
+    <rect x="80" y="740" width="660" height="270" rx="14" fill="url(#gOut)" stroke="#0369a1" stroke-width="2"/>
+    <text x="410" y="775" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">6 · DECODE + NMS</text>
+    <text x="410" y="798" text-anchor="middle" font-size="12" fill="#075985">src/inpactor3/model.py · decode()   +   src/inpactor3/nms.py</text>
+
+    <text x="100" y="828" font-size="12" font-weight="600" fill="#0f172a">Decode:</text>
+    <text x="100" y="844" font-size="11" fill="#334155">celdas con objectness &gt; umbral se convierten en cajas concretas.</text>
+    <text x="100" y="860" font-size="11" fill="#334155">start = celda × 100 + offset · 100 · · · length = exp(log-len) · 100</text>
+
+    <text x="100" y="890" font-size="12" font-weight="600" fill="#0f172a">NMS 1D:</text>
+    <text x="100" y="906" font-size="11" fill="#334155">si dos cajas se solapan mucho (IoU ≥ 0.3), se queda la de mayor score.</text>
+
+    <text x="100" y="936" font-size="12" font-weight="600" fill="#0f172a">Ejemplo real de una ventana:</text>
+    <text x="100" y="954" font-size="11" font-family="monospace" fill="#0f172a">verdaderas:  [25860, 31009) ORYCO   [34455, 39666) ORYCO</text>
+    <text x="100" y="970" font-size="11" font-family="monospace" fill="#166534">predichas :  [27017, 32363) ORYCO  score=0.89  ✔</text>
+    <text x="100" y="986" font-size="11" font-family="monospace" fill="#166534">              [24241, 28290) ORYCO  score=0.74  ✔</text>
+    <text x="100" y="1002" font-size="11" font-family="monospace" fill="#b45309">              [36256, 39991) ALE    score=0.55  linaje incorrecto</text>
+  </g>
+
+  <!-- ETAPA 7: ARTEFACTOS -->
+  <g>
+    <rect x="780" y="740" width="640" height="270" rx="14" fill="url(#gOut)" stroke="#0369a1" stroke-width="2"/>
+    <text x="1100" y="775" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">7 · QUÉ QUEDA EN DISCO</text>
+
+    <text x="800" y="808" font-size="12" font-weight="600" fill="#0f172a">Datos:</text>
+    <text x="800" y="824" font-size="11" font-family="monospace" fill="#334155">data/raw/inpactordb_nr/*.fasta          565 MB · 67 241 seqs</text>
+    <text x="800" y="840" font-size="11" font-family="monospace" fill="#334155">data/corpus/inpactor3_v0.fasta          558 MB · 65 605 seqs</text>
+    <text x="800" y="856" font-size="11" font-family="monospace" fill="#334155">data/corpus/inpactor3_v0.manifest.jsonl 19 MB · proveniencia</text>
+
+    <text x="800" y="884" font-size="12" font-weight="600" fill="#0f172a">Modelo:</text>
+    <text x="800" y="900" font-size="11" font-family="monospace" fill="#334155">models/inpactor3_demo.pt              checkpoint PyTorch</text>
+
+    <text x="800" y="928" font-size="12" font-weight="600" fill="#0f172a">Auditoría:</text>
+    <text x="800" y="944" font-size="11" font-family="monospace" fill="#334155">data/audit_*.tsv                       especie × linaje</text>
+
+    <text x="800" y="972" font-size="12" font-weight="600" fill="#0f172a">Docs de referencia:</text>
+    <text x="800" y="988" font-size="11" font-family="monospace" fill="#334155">docs/datasets.md · data/lineage_map.tsv</text>
+  </g>
+
+  <line x1="410" y1="700" x2="410" y2="738" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="1100" y1="700" x2="1100" y2="738" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

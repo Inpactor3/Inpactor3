@@ -5,6 +5,12 @@ Clasificador generalizable de elementos transponibles (plantas, hongos, humano) 
 
 **Proyecto Integrador II** · Universidad de Caldas · agosto–diciembre 2026
 
+## Flujo del proyecto
+
+![Flujo de Inpactor3](FLUJO.svg)
+
+> Ver [FLUJO.svg](FLUJO.svg) en el navegador o VSCode para el diagrama completo.
+
 ## Contexto
 
 Inpactor3 es un reemplazo de la red neuronal de clasificación (`Inpactor2_Class`) del pipeline Inpactor2, con el objetivo de generalizar la detección/clasificación de LTR-retrotransposones a distintos reinos (plantas, hongos, humano), no solo plantas.
@@ -31,6 +37,45 @@ Inpactor3/
 ## Estado
 
 Semana 2 — repositorio inicializado. Próximo entregable según Lineamientos Generales v4.
+
+## Reproducir el corpus tras clonar
+
+Los datasets pesados **no se versionan aquí** (Zenodo/Dfam son la fuente de
+verdad). Cualquiera que clone el repo regenera el corpus con estos pasos:
+
+```bash
+git clone https://github.com/Inpactor3/Inpactor3.git
+cd Inpactor3
+
+# 1) Entorno + dependencias
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# 2) Descarga desde Zenodo (~155 MB, ~2 min con buen internet)
+python scripts/audit_datasets.py --which inpactordb_nr
+
+# 3) Fusión canónica → data/corpus/inpactor3_v0.fasta
+python scripts/merge_corpus.py \
+    --inpactordb data/raw/inpactordb_nr/InpactorDB_non_redundant_final_V5.fasta \
+    --lineage-map data/lineage_map.tsv \
+    --out data/corpus/inpactor3_v0.fasta \
+    --manifest data/corpus/inpactor3_v0.manifest.jsonl
+
+# 4) Entrenar la demo (~1 min en CPU)
+python scripts/train_demo.py \
+    --fasta data/corpus/inpactor3_v0.fasta \
+    --epochs 5 --batch 2 --limit-ltrs 800 --windows 96 --det-thr 0.5
+```
+
+**Por qué no subimos los datos:**
+- El corpus fusionado (~558 MB) excede el límite de 100 MB por archivo de GitHub.
+- InpactorDB ya tiene DOI ([10.5281/zenodo.6380332](https://zenodo.org/records/6380332)); redistribuir aquí crearía una copia frágil.
+- CC-BY exige atribución explícita por fuente — mejor que cada quien lo baje directo.
+- El `.gitignore` ya excluye `data/raw/`, `data/corpus/*.fasta`, `.venv/` y `models/*.pt`.
+
+**Qué sí está versionado**: código (`scripts/`, `src/`), mapa de linajes
+(`data/lineage_map.tsv`), auditorías (`data/audit_*.tsv`), documentación
+(`docs/`, `FLUJO.svg`, este README).
 
 ## Demo YORO 1D (fase actual)
 
