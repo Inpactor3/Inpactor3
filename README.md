@@ -32,6 +32,100 @@ Inpactor3/
 
 Semana 2 — repositorio inicializado. Próximo entregable según Lineamientos Generales v4.
 
+## Demo YORO 1D (fase actual)
+
+Detector one-shot estilo YOLO/YORO adaptado a genómica: una CNN residual 1D
+predice sobre una retícula de celdas de 100 bp `objectness · offset · longitud ·
+linaje` de cada LTR-RT completo; NMS 1D deduplica.
+
+### 1. Instalación
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 2. Auditoría y descarga de las bases (URLs verificadas 2026-09-20)
+
+```bash
+# lista los datasets configurados
+python scripts/audit_datasets.py --which list
+
+# descarga y audita el corpus mínimo
+python scripts/audit_datasets.py --which inpactordb_nr
+python scripts/audit_datasets.py --which panteon_fasta,panteon_metadata
+
+# todo (>2 GB)
+python scripts/audit_datasets.py --which all
+```
+
+Genera `data/audit_*.tsv` con conteos por linaje / especie y el % de
+desbalance top-10.
+
+| Fuente | Zenodo / URL | Tamaño | Licencia | Rol en el corpus |
+|---|---|---|---|---|
+| InpactorDB V5 non-redundant | [6380332](https://zenodo.org/records/6380332) | 155 MB | CC-BY-4.0 | núcleo plantas |
+| InpactorDB V5 redundant | [6380332](https://zenodo.org/records/6380332) | 292 MB | CC-BY-4.0 | ampliación |
+| InpactorDB negatives | [4543905](https://zenodo.org/records/4543905) | 865 MB | CC-BY-4.0 | ventanas negativas |
+| PanTEon v1.6.2 | [21372179](https://zenodo.org/records/21372179) | 992 MB | CC-BY-4.0 | animales+plantas+hongos |
+| Dfam 40 curated consensus | [dfam.org release](https://www.dfam.org/releases/current/families/FamDB/) | 28 MB | **CC0** | LTR-RTs no vegetales |
+| REXDB Viridiplantae v4 | [bitbucket petrnovak/re_databases](https://bitbucket.org/petrnovak/re_databases) | — | académica | referencia taxonómica |
+| GyDB 2.0 HMMs | [gydb.org](https://gydb.org) | — | académica | verificación de dominios |
+| RepetDB | [urgi.versailles.inrae.fr/repetdb](https://urgi.versailles.inrae.fr/repetdb) | — | INRAE open | consensos plantas/hongos |
+| RepBase | [girinst.org](https://www.girinst.org/repbase) | — | **pago** | descartada por licencia |
+
+Ver la ficha detallada de cada base y la matriz de solapamientos en
+[`docs/datasets.md`](docs/datasets.md) y el mapa de linajes canónicos en
+[`data/lineage_map.tsv`](data/lineage_map.tsv).
+
+### 3. Fusión en corpus unificado
+
+```bash
+python scripts/merge_corpus.py \
+    --inpactordb data/raw/inpactordb_nr/InpactorDB_non_redundant_final_V5.fasta \
+    --panteon    data/raw/PanTEon_Database_v1.6.2.fasta \
+    --lineage-map data/lineage_map.tsv \
+    --out       data/corpus/inpactor3_v0.fasta \
+    --manifest  data/corpus/inpactor3_v0.manifest.jsonl
+```
+
+Normaliza el linaje contra `data/lineage_map.tsv` (Wicker ↔ REXDB ↔ Dfam),
+filtra por longitud [1kb, 25kb] y N-content <5%, deduplica por hash exacto y
+emite un FASTA canónico con header `>{id}|src=...|lin=CANON|sp=...|len=...`
+más un manifiesto JSONL con proveniencia por secuencia. Dedup difusa
+(CD-HIT-est o MMseqs2 al 95% id / 80% cov) es un paso posterior recomendado.
+
+### 4. Entrenar la demo sobre el corpus fusionado
+
+```bash
+python scripts/train_demo.py \
+    --fasta data/corpus/inpactor3_v0.fasta \
+    --epochs 3 --batch 4 --limit-ltrs 2000 --windows 256
+```
+
+Construye ventanas de 50 000 bp plantando 1-3 LTR-RTs **reales** de InpactorDB
+sobre flancos aleatorios, entrena `Yoro1D` con pérdida combinada
+(BCE objectness + SmoothL1 offset/log-len + CE clase) y decodifica 2 ventanas
+de validación mostrando cajas verdaderas vs predichas tras NMS. Guarda el
+checkpoint en `models/inpactor3_demo.pt`.
+
+### Arquitectura
+
+- **Entrada** `(B, 4, 50000)` one-hot ACGT
+- **Backbone** 5 bloques residuales 1D · strides `2·5·5·2·1` → stride total 100
+- **Cabeza** `Conv1d → (3 + n_clases)` por celda:
+  `[0]` objectness · `[1]` offset intra-celda · `[2]` `log(len/cell_size)` ·
+  `[3:]` logits de linaje (idx 0 = background)
+- **Postproceso** NMS 1D con IoU ≥ 0.3
+
+### Limitaciones de esta demo
+
+- Los flancos son DNA aleatorio (no genoma real): sirve para validar la
+  formulación; el siguiente paso es usar ventanas reales de genomas
+  Ensembl 2025 con anotaciones EDTA como ground-truth.
+- Un solo ancla por celda: aún no maneja elementos anidados en la misma celda.
+- Sin mAP formal: la demo hace decodificación cualitativa.
+
 ## Entorno de desarrollo
 
 Ver [`docs/setup.md`](docs/setup.md) para la guía completa de instalación (Linux/WSL2/macOS Intel) siguiendo la guía del curso.

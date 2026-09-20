@@ -1,0 +1,20 @@
+canonical	wicker_superfam	wicker_code	rexdb_path	dfam_class	notes
+ALE	Copia	RLC	Class_I/LTR/Ty1_copia/Ale	LTR;Copia;Ale	subclado de Ivana/Ale
+ANGELA	Copia	RLC	Class_I/LTR/Ty1_copia/Angela	LTR;Copia;Angela	relacionado con TAR
+BIANCA	Copia	RLC	Class_I/LTR/Ty1_copia/Bianca	LTR;Copia;Bianca	minoritario
+IKEROS	Copia	RLC	Class_I/LTR/Ty1_copia/Ikeros	LTR;Copia;Ikeros	minoritario
+IVANA	Copia	RLC	Class_I/LTR/Ty1_copia/Ivana	LTR;Copia;Ivana
+ORYCO	Copia	RLC	Class_I/LTR/Ty1_copia/Oryco	LTR;Copia;Oryco	rel. Ivana
+OSSER	Copia	RLC	Class_I/LTR/Ty1_copia/Osser	LTR;Copia;Osser	minoritario
+RETROFIT	Copia	RLC	Class_I/LTR/Ty1_copia/Retrofit	LTR;Copia;Retrofit	rel. Ale
+SIRE	Copia	RLC	Class_I/LTR/Ty1_copia/SIRE	LTR;Copia;SIRE
+TAR	Copia	RLC	Class_I/LTR/Ty1_copia/TAR	LTR;Copia;TAR
+TORK	Copia	RLC	Class_I/LTR/Ty1_copia/TORK	LTR;Copia;TORK
+ATHILA	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/non-chromo/Athila	LTR;Gypsy;Athila	no-chromo
+TAT	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/non-chromo/Tat	LTR;Gypsy;Tat	no-chromo
+DEL	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo/Tekay	LTR;Gypsy;Del	DEL ≈ Tekay/Retand histórico
+TEKAY	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo/Tekay	LTR;Gypsy;Tekay	chromovirus
+CRM	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo/CRM	LTR;Gypsy;CRM	chromovirus
+GALADRIEL	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo/Galadriel	LTR;Gypsy;Galadriel	chromovirus
+REINA	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo/Reina	LTR;Gypsy;Reina	chromovirus
+CHROMOVIRUS	Gypsy	RLG	Class_I/LTR/Ty3_gypsy/chromo	LTR;Gypsy;Chromoviridae	grupo (=CRM+GAL+REI+TEK); no usar como etiqueta atómica
