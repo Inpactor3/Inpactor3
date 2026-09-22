@@ -138,14 +138,26 @@ def parse_inpactordb(h: str) -> tuple[str, str, str]:
 
 
 def parse_panteon(h: str) -> tuple[str, str, str]:
-    """Header PanTEon v1.6.2: >kingdom|phylum|class|order|family|species|superfam|lineage|id."""
-    parts = h.split("|")
-    if len(parts) < 6:
+    """
+    Header PanTEon real:
+        SEQID#CLASSI/LTR/COPIA @Species with spaces
+        SEQID#CLASSII/HELITRON/HELITRON @Species
+    Devuelve (order, superfamily, species). Ejemplo:
+        parse_panteon("PDB01#CLASSI/LTR/GYPSY @Puma concolor")
+          → ("LTR", "GYPSY", "Puma_concolor")
+    """
+    if "#" not in h:
         return "unknown", "unknown", "unknown"
-    kingdom = parts[0]
-    species = parts[5] if len(parts) > 5 else "unknown"
-    lineage = parts[7] if len(parts) > 7 else parts[-2]
-    return kingdom, lineage, species
+    _, rest = h.split("#", 1)
+    if "@" in rest:
+        classif, species_raw = rest.split("@", 1)
+        species = species_raw.strip().replace(" ", "_")
+    else:
+        classif, species = rest.strip(), "unknown"
+    parts = classif.strip().split("/")
+    order = parts[1] if len(parts) > 1 else "unknown"
+    superfam = parts[2] if len(parts) > 2 else "unknown"
+    return order, superfam, species
 
 
 def audit_fasta(fasta: Path, parser) -> dict:

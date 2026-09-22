@@ -39,11 +39,31 @@ def main() -> int:
     ap.add_argument("--limit-ltrs", type=int, default=2000)
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--det-thr", type=float, default=0.3, help="Umbral de objectness en decode")
+    ap.add_argument("--exclude-species", type=Path, default=None,
+                    help="TXT con especies (una por línea) a EXCLUIR del entrenamiento")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = ap.parse_args()
 
     print(f"[data] cargando LTR-RTs de {args.fasta} (limit={args.limit_ltrs})")
     ltrs, lineages = load_ltrs(args.fasta, limit=args.limit_ltrs)
+    # Excluir especies held-out para evitar leakage con el test set
+    if args.exclude_species and args.exclude_species.exists():
+        exclude = set(l.strip() for l in args.exclude_species.read_text().splitlines() if l.strip())
+        # Re-leer con especie extraída del header
+        kept: list = []
+        with open(args.fasta) as f:
+            headers = [line[1:].strip() for line in f if line.startswith(">")]
+        for h, l in zip(headers[: len(ltrs)], ltrs):
+            sp = "unknown"
+            for tag in h.split("|"):
+                if tag.startswith("sp="):
+                    sp = tag[3:]
+                    break
+            if sp not in exclude:
+                kept.append(l)
+        print(f"[excl] {len(ltrs)-len(kept)} LTR-RTs excluidos ({len(exclude)} especies held-out)")
+        ltrs = kept
+        lineages = sorted({l.lineage for l in ltrs})
     print(f"[data] {len(ltrs)} LTR-RTs · {len(lineages)} linajes: {lineages[:8]}{'...' if len(lineages)>8 else ''}")
     if not ltrs:
         print("[error] FASTA vacío o no filtró nada; ejecuta primero scripts/audit_datasets.py")

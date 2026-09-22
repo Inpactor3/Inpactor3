@@ -48,14 +48,22 @@ def load_lineage_map(path: Path) -> dict[str, str]:
     return m
 
 
-def canon_lineage(raw: str, m: dict[str, str]) -> str:
-    """Resuelve linaje canónico. Acepta compuestos tipo 'TORK/TAR' → toma el primero.
+PANTEON_LTR_SUPERFAMS = {"COPIA", "GYPSY", "BELPAO", "ERV", "LARD", "TRIM"}
 
-    Regla: si el linaje viene como A/B, se prioriza el más específico (A);
-    la ambigüedad se registra en el manifiesto y puede reasignarse luego
-    con TEsorter.
+
+def canon_lineage(raw: str, m: dict[str, str]) -> str:
+    """Resuelve linaje/superfamilia canónico.
+
+    Para InpactorDB usa lineage_map.tsv (linajes tipo ALE, TAT...).
+    Para PanTEon (superfamilias tipo COPIA, GYPSY...) las pasa directas
+    si están en el set de superfamilias LTR válidas.
     """
     key = raw.strip().upper().replace(" ", "_")
+    # PanTEon: superfamilias LTR ya son canónicas
+    if key in PANTEON_LTR_SUPERFAMS:
+        return key
+    if key == "NONLTR":
+        return "UNKNOWN"  # se descarta
     if key in m:
         return m[key]
     # compuestos frecuentes en InpactorDB V5
@@ -88,12 +96,30 @@ def parse_inpactordb(h: str) -> tuple[str, str, str]:
     return "inpactordb", lineage, species
 
 
+PANTEON_LTR_SUPERFAMS = {"COPIA", "GYPSY", "BELPAO", "ERV", "LARD", "TRIM"}
+
+
 def parse_panteon(h: str) -> tuple[str, str, str]:
-    """PanTEon v1.6.2 header (pipe-separated). Ajustar tras ver muestra real."""
-    parts = h.split("|")
-    species = parts[5] if len(parts) > 5 else "unknown"
-    lineage = parts[-2] if len(parts) >= 2 else "unknown"
-    return "panteon", lineage, species
+    """
+    Header PanTEon real: SEQID#CLASSI/LTR/COPIA @Species with spaces
+    Devuelve (src, superfamily_como_etiqueta, species).
+    Devuelve superfamily="NONLTR" para elementos que no sean LTR (para filtrar).
+    """
+    if "#" not in h:
+        return "panteon", "unknown", "unknown"
+    _, rest = h.split("#", 1)
+    if "@" in rest:
+        classif, species_raw = rest.split("@", 1)
+        species = species_raw.strip().replace(" ", "_")
+    else:
+        classif, species = rest.strip(), "unknown"
+    parts = classif.strip().split("/")
+    order = parts[1] if len(parts) > 1 else ""
+    superfam = parts[2] if len(parts) > 2 else "unknown"
+    # Filtrar solo LTR-RTs; el resto se marca para descarte
+    if order != "LTR":
+        return "panteon", "NONLTR", species
+    return "panteon", superfam, species
 
 
 PARSERS = {"inpactordb": parse_inpactordb, "panteon": parse_panteon}
