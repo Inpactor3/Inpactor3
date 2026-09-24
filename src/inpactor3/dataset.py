@@ -112,6 +112,7 @@ class LTRWindowDataset(Dataset):
         max_per_window: int = 3,
         n_windows: int = 512,
         seed: int = 0,
+        neg_frac: float = 0.4,
     ):
         self.ltrs = ltrs
         self.window_size = window_size
@@ -123,11 +124,15 @@ class LTRWindowDataset(Dataset):
         self.lin2id = {l: i + 1 for i, l in enumerate(lineages)}
         self.n_classes = len(lineages) + 1
         self.seed = seed
+        self.neg_frac = neg_frac  # % de ventanas sin ningún LTR-RT (fondo puro)
 
     def __len__(self) -> int:
         return self.n_windows
 
     def _sample_window(self, rng: random.Random):
+        # con probabilidad neg_frac, ventana de solo fondo (sin LTR-RTs)
+        if rng.random() < self.neg_frac:
+            return random_dna(self.window_size, rng), []
         k = rng.randint(1, self.max_per_window)
         # elige LTR-RTs que quepan
         chosen: list[LTR] = []
