@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" font-family="'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrowH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <linearGradient id="gData" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/><stop offset="1" stop-color="#fde68a"/>
+    </linearGradient>
+    <linearGradient id="gInp2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="gInp3" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#ede9fe"/><stop offset="1" stop-color="#ddd6fe"/>
+    </linearGradient>
+    <linearGradient id="gRes" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#dcfce7"/><stop offset="1" stop-color="#bbf7d0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="1920" height="1080" fill="#f8fafc"/>
+
+  <!-- Título -->
+  <text x="960" y="70" text-anchor="middle" font-size="42" font-weight="700" fill="#0f172a">
+    Inpactor2 vs Inpactor3 — ¿dan la misma salida?
+  </text>
+  <text x="960" y="108" text-anchor="middle" font-size="20" fill="#475569">
+    Comparación directa sobre 30 LTR-retrotransposones reales de la base PanTEon
+  </text>
+
+  <!-- ========================= PANEL 1: DATOS ========================= -->
+  <g>
+    <rect x="40" y="150" width="440" height="820" rx="16" fill="url(#gData)" stroke="#b45309" stroke-width="2"/>
+    <text x="260" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#78350f">1 · LOS DATOS</text>
+    <text x="260" y="225" text-anchor="middle" font-size="15" fill="#92400e">Base de datos PanTEon v1.6.2</text>
+
+    <text x="60" y="270" font-size="16" font-weight="600" fill="#0f172a">¿Qué es PanTEon?</text>
+    <text x="60" y="292" font-size="14" fill="#334155">Colección de ~240 000 elementos</text>
+    <text x="60" y="310" font-size="14" fill="#334155">transponibles curados de plantas,</text>
+    <text x="60" y="328" font-size="14" fill="#334155">hongos y animales.</text>
+    <text x="60" y="346" font-size="13" fill="#64748b">Zenodo 21372179 · CC-BY 4.0</text>
+
+    <text x="60" y="390" font-size="16" font-weight="600" fill="#0f172a">Muestra usada en la prueba:</text>
+    <rect x="60" y="405" width="400" height="200" fill="#fffbeb" stroke="#d97706"/>
+    <text x="260" y="435" text-anchor="middle" font-size="52" font-weight="800" fill="#78350f">30</text>
+    <text x="260" y="460" text-anchor="middle" font-size="14" fill="#78350f">LTR-retrotransposones reales</text>
+    <text x="80" y="490" font-size="13" fill="#0f172a">• 5 de cada superfamilia LTR:</text>
+    <text x="100" y="510" font-size="12" fill="#334155">COPIA · GYPSY · ERV</text>
+    <text x="100" y="527" font-size="12" fill="#334155">LARD · BELPAO · TRIM</text>
+    <text x="80" y="555" font-size="13" fill="#0f172a">• Especies variadas:</text>
+    <text x="100" y="573" font-size="12" fill="#334155">Danio rerio, Puma concolor,</text>
+    <text x="100" y="590" font-size="12" fill="#334155">Anastrepha, Talpa, Ondatra…</text>
+
+    <text x="60" y="640" font-size="16" font-weight="600" fill="#0f172a">Formato del header:</text>
+    <rect x="60" y="655" width="400" height="60" fill="#fff" stroke="#d97706"/>
+    <text x="70" y="678" font-size="11" font-family="monospace" fill="#0f172a">&gt;PDB00002101#CLASSI/LTR/LARD</text>
+    <text x="70" y="695" font-size="11" font-family="monospace" fill="#0f172a"> @Esox lucius</text>
+    <text x="70" y="710" font-size="11" font-family="monospace" fill="#64748b">↑seq ID ↑superfamilia ↑especie</text>
+
+    <text x="60" y="755" font-size="16" font-weight="600" fill="#0f172a">Verdad conocida:</text>
+    <text x="60" y="775" font-size="13" fill="#334155">De cada secuencia sabemos</text>
+    <text x="60" y="792" font-size="13" fill="#334155">cuál es su superfamilia real</text>
+    <text x="60" y="809" font-size="13" fill="#334155">→ podemos medir aciertos.</text>
+
+    <rect x="60" y="838" width="400" height="110" fill="#fef3c7" stroke="#b45309" rx="6"/>
+    <text x="260" y="860" text-anchor="middle" font-size="14" font-weight="700" fill="#78350f">Mismo insumo</text>
+    <text x="260" y="878" text-anchor="middle" font-size="13" fill="#78350f">para las DOS herramientas</text>
+    <text x="260" y="905" text-anchor="middle" font-size="12" fill="#0f172a">Inpactor2 recibe las 30 secuencias</text>
+    <text x="260" y="922" text-anchor="middle" font-size="12" fill="#0f172a">Inpactor3 recibe las 30 secuencias</text>
+    <text x="260" y="942" text-anchor="middle" font-size="12" font-style="italic" fill="#78350f">→ comparación justa</text>
+  </g>
+
+  <!-- ========================= PANEL 2: INPACTOR2 ========================= -->
+  <g>
+    <rect x="510" y="150" width="440" height="820" rx="16" fill="url(#gInp2)" stroke="#1d4ed8" stroke-width="2"/>
+    <text x="730" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#1e3a8a">2 · INPACTOR2</text>
+    <text x="730" y="225" text-anchor="middle" font-size="15" fill="#1e40af">La herramienta existente (2023)</text>
+
+    <text x="530" y="270" font-size="16" font-weight="600" fill="#0f172a">¿Cómo funciona?</text>
+    <text x="530" y="292" font-size="14" fill="#334155">Cascada de 3 redes neuronales</text>
+    <text x="530" y="310" font-size="14" fill="#334155">separadas, entrenadas con InpactorDB</text>
+    <text x="530" y="328" font-size="14" fill="#334155">(solo plantas):</text>
+    <text x="550" y="352" font-size="13" fill="#334155">① Detectar (LTR_Finder + CNN)</text>
+    <text x="550" y="372" font-size="13" fill="#334155">② Filtrar elementos íntegros</text>
+    <text x="550" y="392" font-size="13" fill="#334155">③ Clasificar linaje</text>
+
+    <text x="530" y="435" font-size="16" font-weight="600" fill="#0f172a">Qué sabe reconocer:</text>
+    <text x="530" y="455" font-size="13" fill="#334155">14 linajes de plantas (ALE, TAT,</text>
+    <text x="530" y="472" font-size="13" fill="#334155">ATHILA, CRM, GALADRIEL, REINA…)</text>
+    <text x="530" y="489" font-size="13" font-weight="600" fill="#dc2626">→ NO conoce ERV, LARD, BELPAO, TRIM</text>
+
+    <text x="530" y="530" font-size="16" font-weight="600" fill="#0f172a">Salida — archivo TSV:</text>
+    <rect x="530" y="545" width="400" height="120" fill="#fff" stroke="#1d4ed8"/>
+    <text x="540" y="565" font-size="10" font-family="monospace" fill="#0f172a">Inpactor2_predictions.tab</text>
+    <text x="540" y="583" font-size="9" font-family="monospace" fill="#64748b">seqid  start  end  len  linaje  det  filt  cls</text>
+    <text x="540" y="600" font-size="9" font-family="monospace" fill="#0f172a">chr1  12345  18234  5889  RLC/ALE  0.95  0.87  0.91</text>
+    <text x="540" y="617" font-size="9" font-family="monospace" fill="#0f172a">chr1  35100  40950  5850  RLG/TAT  0.93  0.88  0.94</text>
+    <text x="540" y="634" font-size="9" font-family="monospace" fill="#0f172a">chr2  8203   14100  5897  RLG/CRM  0.88  0.85  0.72</text>
+    <text x="540" y="655" font-size="10" fill="#64748b">8 columnas · una fila por LTR-RT detectado</text>
+
+    <text x="530" y="700" font-size="16" font-weight="600" fill="#0f172a">Resultado sobre PanTEon:</text>
+    <rect x="530" y="715" width="400" height="90" fill="#eff6ff" stroke="#1d4ed8" rx="6"/>
+    <text x="730" y="753" text-anchor="middle" font-size="46" font-weight="800" fill="#1e3a8a">26.7%</text>
+    <text x="730" y="782" text-anchor="middle" font-size="14" fill="#1e40af">de aciertos en superfamilia</text>
+    <text x="730" y="800" text-anchor="middle" font-size="12" fill="#0f172a">(8 de 30 secuencias)</text>
+
+    <text x="530" y="836" font-size="14" font-weight="600" fill="#0f172a">Por qué falla en 22 de 30:</text>
+    <text x="530" y="856" font-size="13" fill="#334155">• Nunca vio ERV, LARD, BELPAO, TRIM</text>
+    <text x="530" y="874" font-size="13" fill="#334155">• Predice siempre COPIA o GYPSY</text>
+    <text x="530" y="892" font-size="13" fill="#334155">• Es un sesgo del entrenamiento,</text>
+    <text x="530" y="910" font-size="13" fill="#334155">  no del modelo.</text>
+    <text x="530" y="945" font-size="12" font-style="italic" fill="#1e40af">"Solo sabe lo que vio en plantas."</text>
+  </g>
+
+  <!-- ========================= PANEL 3: INPACTOR3 ========================= -->
+  <g>
+    <rect x="980" y="150" width="440" height="820" rx="16" fill="url(#gInp3)" stroke="#6d28d9" stroke-width="2"/>
+    <text x="1200" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#4c1d95">3 · INPACTOR3</text>
+    <text x="1200" y="225" text-anchor="middle" font-size="15" fill="#5b21b6">Nuestra propuesta (YORO 1D)</text>
+
+    <text x="1000" y="270" font-size="16" font-weight="600" fill="#0f172a">¿Cómo funciona?</text>
+    <text x="1000" y="292" font-size="14" fill="#334155">Una sola red convolucional 1D con</text>
+    <text x="1000" y="310" font-size="14" fill="#334155">cuatro cabezas: detecta + localiza</text>
+    <text x="1000" y="328" font-size="14" fill="#334155">+ mide + clasifica en un solo paso.</text>
+    <text x="1020" y="352" font-size="13" fill="#334155">① objectness (¿hay LTR-RT?)</text>
+    <text x="1020" y="372" font-size="13" fill="#334155">② offset (¿dónde empieza?)</text>
+    <text x="1020" y="392" font-size="13" fill="#334155">③ longitud (¿cuánto mide?)</text>
+    <text x="1020" y="412" font-size="13" fill="#334155">④ linaje (¿qué tipo es?)</text>
+
+    <text x="1000" y="450" font-size="16" font-weight="600" fill="#0f172a">Qué sabe reconocer HOY:</text>
+    <text x="1000" y="470" font-size="13" fill="#334155">Las mismas 13 clases de InpactorDB</text>
+    <text x="1000" y="487" font-size="13" fill="#334155">(entrenamiento demo, 2 épocas)</text>
+    <text x="1000" y="504" font-size="13" font-weight="600" fill="#dc2626">→ mismo punto ciego que Inpactor2</text>
+
+    <text x="1000" y="545" font-size="16" font-weight="600" fill="#0f172a">Salida — mismo formato TSV:</text>
+    <rect x="1000" y="560" width="400" height="120" fill="#fff" stroke="#6d28d9"/>
+    <text x="1010" y="580" font-size="10" font-family="monospace" fill="#0f172a">Inpactor3_predictions.tab</text>
+    <text x="1010" y="598" font-size="9" font-family="monospace" fill="#64748b">seqid  start  end  len  linaje  det  filt  cls</text>
+    <text x="1010" y="615" font-size="9" font-family="monospace" fill="#0f172a">chr1  12100  18400  6300  ORYCO   0.89   -   0.71</text>
+    <text x="1010" y="632" font-size="9" font-family="monospace" fill="#0f172a">chr1  35520  40870  5350  REINA   0.92   -   0.68</text>
+    <text x="1010" y="649" font-size="9" font-family="monospace" fill="#0f172a">chr2  8100  13950  5850  REINA   0.85   -   0.55</text>
+    <text x="1010" y="670" font-size="10" fill="#64748b">Idéntico a Inpactor2 → comparación directa</text>
+
+    <text x="1000" y="715" font-size="16" font-weight="600" fill="#0f172a">Resultado sobre PanTEon:</text>
+    <rect x="1000" y="730" width="400" height="90" fill="#f5f3ff" stroke="#6d28d9" rx="6"/>
+    <text x="1200" y="768" text-anchor="middle" font-size="46" font-weight="800" fill="#4c1d95">13.3%</text>
+    <text x="1200" y="797" text-anchor="middle" font-size="14" fill="#5b21b6">de aciertos en superfamilia</text>
+    <text x="1200" y="815" text-anchor="middle" font-size="12" fill="#0f172a">(4 de 30 secuencias)</text>
+
+    <text x="1000" y="850" font-size="14" font-weight="600" fill="#0f172a">Por qué falla en 26 de 30:</text>
+    <text x="1000" y="870" font-size="13" fill="#334155">• Mismo problema: entrenado en</text>
+    <text x="1000" y="887" font-size="13" fill="#334155">  InpactorDB (solo plantas).</text>
+    <text x="1000" y="905" font-size="13" fill="#334155">• Además: solo 2 épocas de entreno.</text>
+    <text x="1000" y="925" font-size="13" fill="#334155">• Aún es una demo, no una versión</text>
+    <text x="1000" y="942" font-size="13" fill="#334155">  final.</text>
+  </g>
+
+  <!-- ========================= PANEL 4: RESULTADO ========================= -->
+  <g>
+    <rect x="1450" y="150" width="430" height="820" rx="16" fill="url(#gRes)" stroke="#15803d" stroke-width="2"/>
+    <text x="1665" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#14532d">4 · ¿DIERON LO MISMO?</text>
+    <text x="1665" y="225" text-anchor="middle" font-size="15" fill="#166534">Respuesta corta: casi la mitad de las veces sí.</text>
+
+    <rect x="1470" y="250" width="390" height="110" fill="#fff" stroke="#15803d" rx="6"/>
+    <text x="1665" y="292" text-anchor="middle" font-size="46" font-weight="800" fill="#14532d">46.7%</text>
+    <text x="1665" y="322" text-anchor="middle" font-size="14" fill="#166534">de las 30 secuencias,</text>
+    <text x="1665" y="340" text-anchor="middle" font-size="14" fill="#166534">ambos dijeron lo mismo</text>
+    <text x="1665" y="355" text-anchor="middle" font-size="12" fill="#0f172a">(14 predicciones coincidentes)</text>
+
+    <text x="1470" y="395" font-size="16" font-weight="600" fill="#0f172a">Lo que la comparación muestra:</text>
+
+    <text x="1470" y="425" font-size="14" font-weight="700" fill="#0f172a">✓ Mismo formato de salida</text>
+    <text x="1490" y="443" font-size="12" fill="#334155">TSV idéntico → intercambiables.</text>
+
+    <text x="1470" y="470" font-size="14" font-weight="700" fill="#0f172a">✓ Misma entrada, misma forma</text>
+    <text x="1490" y="488" font-size="12" fill="#334155">de "razonar" en casi la mitad</text>
+    <text x="1490" y="503" font-size="12" fill="#334155">de los casos.</text>
+
+    <text x="1470" y="530" font-size="14" font-weight="700" fill="#dc2626">✗ Ambos fallan en lo mismo</text>
+    <text x="1490" y="548" font-size="12" fill="#334155">Ninguno conoce ERV, LARD,</text>
+    <text x="1490" y="563" font-size="12" fill="#334155">BELPAO, TRIM.</text>
+
+    <text x="1470" y="590" font-size="14" font-weight="700" fill="#0f172a">↔ La ventaja de Inpactor2 hoy:</text>
+    <text x="1490" y="608" font-size="12" fill="#334155">Está mejor entrenado (más años),</text>
+    <text x="1490" y="623" font-size="12" fill="#334155">pero solo sirve para plantas.</text>
+
+    <rect x="1470" y="650" width="390" height="140" fill="#fef2f2" stroke="#dc2626" rx="6"/>
+    <text x="1665" y="675" text-anchor="middle" font-size="14" font-weight="700" fill="#991b1b">Diagnóstico honesto</text>
+    <text x="1480" y="700" font-size="12" fill="#0f172a">El problema NO es la arquitectura</text>
+    <text x="1480" y="717" font-size="12" fill="#0f172a">de Inpactor3 — es que se entrenó</text>
+    <text x="1480" y="734" font-size="12" fill="#0f172a">con el mismo corpus limitado que</text>
+    <text x="1480" y="751" font-size="12" fill="#0f172a">Inpactor2 (solo InpactorDB plantas).</text>
+    <text x="1480" y="775" font-size="12" font-style="italic" fill="#7f1d1d">"Basura entra, basura sale."</text>
+
+    <rect x="1470" y="805" width="390" height="150" fill="#dcfce7" stroke="#15803d" rx="6"/>
+    <text x="1665" y="828" text-anchor="middle" font-size="14" font-weight="700" fill="#14532d">Siguiente paso</text>
+    <text x="1480" y="852" font-size="12" fill="#0f172a">Reentrenar Inpactor3 con TODAS</text>
+    <text x="1480" y="869" font-size="12" fill="#0f172a">las 6 superfamilias de PanTEon</text>
+    <text x="1480" y="886" font-size="12" fill="#0f172a">(incluyendo ERV, LARD…).</text>
+    <text x="1480" y="912" font-size="12" font-weight="700" fill="#14532d">Solo Inpactor3 puede hacerlo:</text>
+    <text x="1480" y="930" font-size="12" fill="#0f172a">Inpactor2 seguirá siendo ciego</text>
+    <text x="1480" y="947" font-size="12" fill="#0f172a">porque su arquitectura es rígida.</text>
+  </g>
+
+  <!-- Barra inferior con conclusión -->
+  <rect x="40" y="990" width="1840" height="60" rx="8" fill="#0f172a"/>
+  <text x="960" y="1023" text-anchor="middle" font-size="18" font-weight="600" fill="#f8fafc">
+    Conclusión: Inpactor3 puede sustituir a Inpactor2 con misma salida, y además crecer a superfamilias que Inpactor2 nunca conocerá.
+  </text>
+</svg>
